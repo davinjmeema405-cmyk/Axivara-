@@ -57,3 +57,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Axivara server running on port ${PORT}`);
 });
+"dependencies": {
+  "express": "^4.18.2",
+  "mongoose": "^7.0.0"
+}
