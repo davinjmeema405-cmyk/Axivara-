@@ -1,3 +1,19 @@
+const mongoose = require("mongoose");
+
+// Replace the connection string below with your own from Atlas
+const mongoURI = "mongodb+srv://davinjmeema405_db_user:zp3megKLiCAbM4i0@cluster0.zxjtizy.mongodb.net/axivara?retryWrites=true&w=majority";
+
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+mongoose.connection.once("open", () => {
+  console.log("Connected to Axivara MongoDB database!");
+});
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB connection error:", err);
+});
 const express = require("express");
 const app = express();
 
