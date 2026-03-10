@@ -1,28 +1,29 @@
-import readline from "readline";
+import express from "express";
 import { AxivaraCore } from "./src/core/axivaraCore.js";
 import { config } from "./config/config.js";
 
-const ai = new AxivaraCore(config);
+const app = express();
+app.use(express.json());
 
+const ai = new AxivaraCore(config);
 ai.start();
 
-const rl = readline.createInterface({
- input: process.stdin,
- output: process.stdout
+app.get("/", (req, res) => {
+  res.send("Axivara AI is running");
 });
 
-function chat(){
+app.post("/chat", (req, res) => {
+  const { message } = req.body;
 
- rl.question("You: ", (input)=>{
+  const response = ai.process(message);
 
-  const response = ai.process(input);
+  res.json({
+    reply: response
+  });
+});
 
-  console.log("Axivara:",response);
+const PORT = process.env.PORT || 3000;
 
-  chat();
-
- });
-
-}
-
-chat();
+app.listen(PORT, () => {
+  console.log("Axivara API running on port", PORT);
+});
