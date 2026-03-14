@@ -1,6 +1,11 @@
 import fs from "fs";
 
 export function loadMemory(file){
+
+ if(!fs.existsSync(file)){
+  return [];
+ }
+
  return JSON.parse(fs.readFileSync(file));
 }
 
@@ -19,4 +24,5 @@ export function addMemory(file,input,response){
  });
 
  saveMemory(file,memory);
+}
 }
