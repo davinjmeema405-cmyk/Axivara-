@@ -47,6 +47,16 @@ app.post("/chat", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    service: "Axivara",
+    time: new Date().toISOString()
+  });
+});
+
+const PORT = process.env.PORT || 10000;
+
 app.listen(PORT, () => {
-  console.log("Axivara API running on port", PORT);
+  console.log(`Axivara server running on port ${PORT}`);
 });
